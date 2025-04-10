@@ -5,16 +5,23 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(
-    cors({
-        origin: process.env.CORS_ORIGIN,
-        Credential: true,
-    })
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    Credential: true,
+  })
 );
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express.static("public"))
-app.use(cookieParser())
+app.use(express.static("public"));
+app.use(cookieParser());
 
+//routes import
 
+import router from "./routes/user.routes.js";
+
+//routes decleration
+app.use("/api/v1/users", router);
+
+//http://localhost:3000/api/v1/users/register
 
 export { app };
