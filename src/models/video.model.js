@@ -38,7 +38,7 @@ const videoSchema = new Schema(
             ref:"User"
         },            
 
-    ispublic = 
+    // ispublic = 
 
 
 
