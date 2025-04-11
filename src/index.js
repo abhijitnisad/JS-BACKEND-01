@@ -1,71 +1,61 @@
+import {app} from './app.js'
 import dotenv from "dotenv"
 import connectDB from "./db/db.js";  
-import {app} from './app.js'
 
 dotenv.config({
-    path:'./env'
+    path:'./.env',
 })
 
-connectDB()
+// const port = process.env.PORT || 8000
+//when use process.env.PORT its not working
 
-.then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-        console.log(`✅ Server is runnign on port :${process.env.PORT}`);
-        
-    })
+const port = 8000
+
+app.get("/", (req, res) =>{
+  res.send("hello sir")
 })
-.catch((err) => {
-    console.log("MONGO db connection failed !!!", err);
+app.get("/abhijit", (req, res) =>{
+  res.send("hello i am  abhijit")
 })
 
+connectDB() 
+  .then(() => {
+    app.listen(port, () => {
+      // console.log(`✅ Server is running on port :${process.env.PORT}`);
+      console.log(`✅ Server is running on port :${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log("❌ MONGO db connection failed !!!", err);
+  });
 
 
+//+++++++++++++++++\
 
 
+// import { app } from "./app.js";
+// import dotenv from "dotenv";
+// import connectDB from "./db/db.js";
+
+// dotenv.config({
+//   path: "./env",
+// });
+
+// app.get("/", (req, res) => {
+//   res.send("hello abhimanyu")
+// })
+
+// connectDB()
+//   .then(() => {
+//     app.listen(process.env.PORT || 8000, () => {
+//       console.log(`Server is running on ${process.env.PORT || 8000}`);
+//     });
+//   })
+//   .catch((err) => {
+//     console.log("Mongo db connection failed");
+//   });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-import express from "express";
-const app = express()
-(async () => {
-    try {
-        mongoose.connect(`${process.env.MONGO_URI}`)
-        app.on("error", (error) => {
-            console.log("ERROR: " , error);
-            throw error
-        
-        })
-        app.listen(process.env.PORT, () => {
-            console.log(`App is listening on port ${process.env.PORT}`);
-            
-        })
-
-    } catch (error) {
-        console.error("Error: ", error);
-        throw err
-        
-    }
-})()
-    */
+// app.listen(process.env.PORT || 8000, () => {
+//       console.log(`Server is running on ${process.env.PORT || 8000}`);
+//     });
