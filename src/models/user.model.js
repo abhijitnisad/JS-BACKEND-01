@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { type } from "os";
 
 const userSchema = new Schema(
   {
@@ -33,10 +32,10 @@ const userSchema = new Schema(
     coverImage: {
       type: String, // cloudinay url
     },
-    watchHistory: {
+    watchHistory: [{
       type: Schema.Types.ObjectId,
       ref: "vide0",
-    },
+    }],
     password: {
       type: String,
       required: [true, "Password required"],
@@ -67,7 +66,7 @@ userSchema.methods.generateAccessToken = function () {
       username: this.username,
       fullName: this.fullName,
     },
-    process.env.ACCESS_TOKEN_SECERET,
+    process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
     }
@@ -81,7 +80,7 @@ userSchema.methods.generateRefereshToken = function () {
         username: this.username,
         fullName: this.fullName,
       },
-      process.env.REFRESH_TOKEN_SECERET,
+      process.env.REFRESH_TOKEN_SECRET,
       {
         expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
       }
