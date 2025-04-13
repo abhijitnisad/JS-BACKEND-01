@@ -6,10 +6,7 @@ dotenv.config({
     path:'./.env',
 })
 
-// const port = process.env.PORT || 8000
-//when use process.env.PORT its not working
-
-const port = 8000
+const port = process.env.PORT || 8000
 
 app.get("/", (req, res) =>{
   res.send("hello sir")
@@ -21,8 +18,7 @@ app.get("/abhijit", (req, res) =>{
 connectDB() 
   .then(() => {
     app.listen(port, () => {
-      // console.log(`✅ Server is running on port :${process.env.PORT}`);
-      console.log(`✅ Server is running on port :${port}`);
+      console.log(`✅ Server is running on port :${process.env.PORT}`);
     });
   })
   .catch((err) => {
